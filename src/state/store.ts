@@ -3,7 +3,7 @@ import {tablesReducer} from "./tablesReducer";
 
 
 const rootReducer = combineReducers({
-    tables: tablesReducer,
+    tablePage: tablesReducer,
 })
 
 export const store = createStore(rootReducer);

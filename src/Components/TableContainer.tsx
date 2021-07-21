@@ -1,12 +1,15 @@
 import React from 'react';
-import Table2 from "./Table2";
+import Table from "./Table";
+import {TableType} from "../state/tablesReducer";
 
-const TableContainer: React.FC<any> = ({dataUrl}):any => {
+type TableContainerType = {
+    dataUrl: TableType[][]
+}
+
+const TableContainer: React.FC<TableContainerType> = ({dataUrl}) => {
+    const mapped = dataUrl.map((el) => <Table dataUrl={el}/>)
     return (
-        dataUrl.map((el:any)=>{
-            return (
-                <Table2 dataUrl={el}/>
-            )})
+        <>{mapped}</>
     );
 };
 

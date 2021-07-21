@@ -1,19 +1,22 @@
 import React from 'react';
 import style from './Table.module.scss'
+import {TableType} from "../state/tablesReducer";
 
-export type TableTypes = {
-    dataUrl: Array<any>
+type TablePropsTypes = {
+    dataUrl: TableType[]
+    length?: number
 }
 
 
-const Table2: React.FC<any> = ({dataUrl}) => {
+const Table: React.FC<any> = ({dataUrl}) => {
+    // entries
     const firstObj = dataUrl.length ? dataUrl[0] : dataUrl;
-    const tableHeader = Object.keys(firstObj.columnsName).map((header: any, index) => {
+    const tableHeader = Object.keys(firstObj.columnsName).map((header: string, index) => {
         return <th key={index + header} className={style.headerT}>{header}</th>
     })
-    const tableBody = firstObj.data.map((el: any) => {
+    const tableBody = firstObj.data.map((el: Object) => {
             return <tr>
-                {Object.values(el).map((value: any, index) => (
+                {Object.values(el).map((value: string, index) => (
                     <td key={index + value}>{value}</td>
                 ))}
             </tr>
@@ -35,4 +38,4 @@ const Table2: React.FC<any> = ({dataUrl}) => {
     );
 };
 
-export default Table2;
+export default Table;
