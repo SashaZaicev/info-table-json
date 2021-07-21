@@ -1,0 +1,39 @@
+.container {
+  margin: auto;
+  //padding: 0px 15px;
+  min-width: 600px;
+  height: 600px;
+}
+
+.mtb3 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 2px solid rgba(128, 0, 128, 0.2);
+
+  th, td, tr {
+    text-align: center;
+    padding: 10px;
+    //border-top: 2px solid purple;
+  }
+}
+
+.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: #edecec;
+  padding: 2px 5px;
+}
+
+.tableResponsive {
+  overflow-x: scroll;
+  width: 95vw;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: aliceblue;
+}
