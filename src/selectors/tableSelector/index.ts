@@ -1,0 +1,1 @@
+export {tableSelector} from './tableSelector';
