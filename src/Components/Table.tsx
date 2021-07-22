@@ -4,19 +4,18 @@ import {TableType} from "../state/tablesReducer";
 
 type TablePropsTypes = {
     dataUrl: TableType[]
-    length?: number
 }
 
-
-const Table: React.FC<any> = ({dataUrl}) => {
+const Table: React.FC<TablePropsTypes> = ({dataUrl}) => {
     // entries
-    const firstObj = dataUrl.length ? dataUrl[0] : dataUrl;
-    const tableHeader = Object.keys(firstObj.columnsName).map((header: string, index) => {
-        return <th key={index + header} className={style.headerT}>{header}</th>
+    const [firstDataItem] = dataUrl;
+    const tableHeader = Object.entries(firstDataItem.columnsName).map((header, index) => {
+        const titleHeader = header[1]
+        return <th key={index + header[0]} className={style.headerT}>{titleHeader}</th>
     })
-    const tableBody = firstObj.data.map((el: Object) => {
+    const tableBody = firstDataItem.data.map((el) => {
             return <tr>
-                {Object.values(el).map((value: string, index) => (
+                {Object.values(el).map((value, index) => (
                     <td key={index + value}>{value}</td>
                 ))}
             </tr>

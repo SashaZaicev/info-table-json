@@ -2,7 +2,7 @@ const ADD_TABLES = 'ADD_TABLES'
 const START_TABLE = 'START_TABLE'
 
 
-const initialState= {
+const initialState = {
     tables: [] as Array<TableType[]>
 }
 type InitStateType = typeof initialState
@@ -12,7 +12,8 @@ export const tablesReducer = (state = initialState, action: ActionsType): InitSt
         case ADD_TABLES: {
             return {
                 ...state,
-                tables: [...state.tables, action.newTable]}
+                tables: [...state.tables, action.newTable]
+            }
         }
         case START_TABLE: {
             return {
@@ -24,16 +25,11 @@ export const tablesReducer = (state = initialState, action: ActionsType): InitSt
             return state
     }
 }
-// type ActionsType = {
-//     newtable: TableType[],
-//     table: TableType[],
-//     type: string
-// }
 
-export const addTables = (newTable: TableType[]) => ({type: ADD_TABLES, newTable}as const)
+export const addTables = (newTable: TableType[]) => ({type: ADD_TABLES, newTable} as const)
 
 export type AddTablesType = ReturnType<typeof addTables>
-export const startTable = (table: TableType[]) => ({type: START_TABLE, table}as const)
+export const startTable = (table: TableType[]) => ({type: START_TABLE, table} as const)
 
 export type StartTableType = ReturnType<typeof startTable>
 type ActionsType = AddTablesType | StartTableType
