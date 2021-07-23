@@ -1,7 +1,5 @@
 import React, {
-  ChangeEvent, ChangeEventHandler,
   FC,
-  ReactNode, SyntheticEvent,
   useEffect,
   useRef,
   useState
@@ -21,10 +19,9 @@ export const Table: FC<PropsType> = ({dataUrl}) => {
       window.removeEventListener('scroll', handleScroll);
     }
   }, [])
-  const handleScroll = (event: Event) => {
+  const handleScroll = () => {
     const ref = headRef
-    // @ts-ignore
-    const target = event.currentTarget.scrollY
+    const target = window.scrollY
     if (ref.current &&
       ref.current.parentElement
       && ref.current.parentElement.offsetTop < target
