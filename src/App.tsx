@@ -9,7 +9,7 @@ import {addTables, startTable} from "./store/tableReducer/actions";
 
 const dataUrl = fileJSON;
 
-export  const App = () => {
+export const App = () => {
   let json;
 
   const tablesStore = useSelector((state: AppRootStateType) => (
@@ -55,13 +55,13 @@ export  const App = () => {
           className="inputFile"
           type="file"
           name="JSON file"
-          onChange={(ev:ChangeEvent<HTMLInputElement>) => handleFileSelect(ev)}
+          onChange={(ev: ChangeEvent<HTMLInputElement>) => handleFileSelect(ev)}
           accept=".json"
         />
       </header>
       {tablesStore && (
         <TableContainer dataUrl={tablesStore}/>
-      )};
+      )}
     </div>
   );
 };
