@@ -5,13 +5,12 @@ import React, {
   useState
 } from 'react';
 import style from './style/table.module.scss'
-import {generateKey} from "src/helpers";
 import {PropsType} from "./types";
 
-export const Table: FC<PropsType> = ({dataUrl}) => {
+export const Table: FC<PropsType> = React.memo(({dataUrl}) => {
   const [firstDataItem] = dataUrl;
   const headRef = useRef<HTMLTableSectionElement>(null)
-  const [top, setTop] = useState(0)
+  const [topHeader, setTop] = useState(0)
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -29,12 +28,16 @@ export const Table: FC<PropsType> = ({dataUrl}) => {
       + ref.current.parentElement.offsetHeight
       - ref.current.clientHeight > target) {
       setTop(target - ref.current.parentElement.offsetTop)
+    } else if (ref.current &&
+      ref.current.parentElement
+      && ref.current.parentElement.offsetTop > target) {
+      setTop(0)
     }
   }
   const tableHeader = Object.entries(firstDataItem.columnsName).map(
     ([key, value], index) => (
       <th
-        key={generateKey(index)}
+        key={index + value}
         className={`${style.headerT} ${style.sticky}`}>
         {value}
       </th>
@@ -42,10 +45,10 @@ export const Table: FC<PropsType> = ({dataUrl}) => {
   );
   const tableBody = firstDataItem.data.map((el, index) => (
       <tr
-        key={generateKey(index)}>
+        key={index + el.name}>
         {Object.values(el).map(
           (value, index) => (
-            <td key={generateKey(index)}>
+            <td key={index + value}>
               {value}
             </td>
           ))}
@@ -58,11 +61,11 @@ export const Table: FC<PropsType> = ({dataUrl}) => {
       `${style.container} ${style.mtb3} ${style.tableResponsive}`
     }>
       <table className={`${style.table}`}>
-        <thead ref={headRef} style={{top: top}}>
+        <thead ref={headRef} style={{top: topHeader}}>
         <tr>{tableHeader}</tr>
         </thead>
         <tbody>{tableBody}</tbody>
       </table>
     </div>
   );
-};
+});
